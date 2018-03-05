@@ -1,0 +1,1 @@
+PoC for Django / Neo4j / Angular / Ionic

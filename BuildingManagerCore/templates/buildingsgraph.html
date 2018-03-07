@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Building Nodes{% endblock %}
+{% block content %}
+<p>This is the list of building nodes</p>
+<ul>
+{% for buildingnode in buildingnodes %}
+    <li>{{forloop.counter}}: {{buildingnode.address}}</li>
+{% empty %}
+    <p>There are no buildings.</p>
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+{% if query %}
+You searched for {{query}}
+{% else %}
+You submitted an empty form
+{% endif %}
+{% if persons %}
+<br/>You found {{persons|length}} result{{persons|pluralize}}.
+<ul>
+{% for person in persons %}
+<li>{{person}}</li>
+{% endfor %}
+</ul>
+{% else %}
+<p> No results</p>
+{% endif %}
+
+{% endblock %}

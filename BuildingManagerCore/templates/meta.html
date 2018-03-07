@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Meta{% endblock %}
+{% block content %}
+<p>This is the list of browser headers</p>
+<table>
+{% for key,value in meta.items %}
+    <tr><td>{{key}}</td><td>{{value}}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

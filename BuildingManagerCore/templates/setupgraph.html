@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+{% if messages %}
+<p style="color: green;">
+{% for message in messages %}
+    {{ message }}<br/>
+{% endfor %}
+</p>
+{% endif %}
+
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.db import models
 from django_neomodel import DjangoNode
-from neomodel import StructuredNode, StringProperty,RelationshipTo,RelationshipFrom
+from neomodel import StructuredNode, StringProperty,RelationshipTo,RelationshipFrom,UniqueIdProperty
 
 # Create your models here.
 class Building(models.Model):
@@ -25,15 +25,26 @@ class Person(models.Model):
     def __str__(self):
         return self.name
 
+class DistrictNode(StructuredNode):
+    name = StringProperty()
+    neighborhoods = RelationshipFrom('NeighborhoodNode','PART_OF')
+
+class NeighborhoodNode(StructuredNode):
+    name = StringProperty()
+    community = RelationshipTo('DistrictNode','PART_OF')
+    buildings = RelationshipFrom('BuildingNode','PART_OF')
+
+
 class BuildingNode(StructuredNode):
     address = StringProperty(unique_index=True)
-    apartment = RelationshipFrom('ApartmentNode','PART_OF')
+    neighborhood = RelationshipTo('NeighborhoodNode','PART_OF')
+    apartments = RelationshipFrom('ApartmentNode','PART_OF')
 
 class ApartmentNode(StructuredNode):
     number = StringProperty()
     floor = StringProperty()
     building = RelationshipTo(BuildingNode,'PART_OF')
-    person = RelationshipFrom('PersonNode','LIVES_IN')
+    persons = RelationshipFrom('PersonNode','LIVES_IN')
 
 class PersonNode(StructuredNode):
     name = StringProperty()

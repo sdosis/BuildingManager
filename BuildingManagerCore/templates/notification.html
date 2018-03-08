@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Notification{% endblock %}
+{% block content %}
+<h1>Emergency Notification</h1>
+{% if form.errors %}
+<p style="color: red;">
+Please correct the error{{ form.errors|pluralize }} below.
+</p>
+{% endif %}
+{% if messages %}
+<p style="color: green;">
+{% for message in messages %}
+    {{ message }}
+{% endfor %}
+</p>
+{% endif %}
+<form action="" method="post">
+<table>
+{{ form.as_table }}
+</table>
+{% csrf_token %}
+<input type="submit" value="Submit">
+</form>
+<p>The following will be notified:</p>
+<ul>
+{% for result in results %}
+            <li>Person: {{result.personname}} with phone {{result.personmobile}} from apartment {{result.apartmentnumber}} at
+            floor {{result.apartmentfloor}} at building {{result.buildingaddress}} at neighborhood {{result.neighborhoodname}} from
+            district {{result.districtname}}</li>
+{% empty %}
+No one to notify
+{{result}}
+{% endfor %}
+</ul>
+{% endblock %}

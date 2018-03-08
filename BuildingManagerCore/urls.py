@@ -10,6 +10,8 @@ urlpatterns = [
     path('meta/',views.meta),
     path('search/',views.search),
     path('search/results/',views.search_results),
+    path('notification/',views.notification),
     path('contact/',views.contact),
-    path('contact/thanks/',views.contactthanks)
+    path('contact/thanks/',views.contactthanks),
+    path('setup/graph/',views.setupgraph)
 ]

@@ -7,12 +7,11 @@ import random
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Welcome")
+    return render(request,'base.html')
 
 def get_persons(request):
     return render(request, 'persons.html')
-    #return render('BuildingManagerCore/persons.html', request, {'persons': Person.nodes.all()})
-
+    
 def get_person(request,person_id):
     try:
         person_id = int(person_id)

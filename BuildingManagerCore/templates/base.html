@@ -5,6 +5,10 @@
 </head>
 <body>
 <h1>Welcome to Building Manager</h1>
+<div>
+    <a href="{% url 'notification' %}">Notification</a>
+    <a href="{% url 'setup-graph' %}">Setup Test Graph</a>
+</div>
 {% block content %}{% endblock %}
 {% block footer %}
 <hr>

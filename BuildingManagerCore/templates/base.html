@@ -1,18 +1,19 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% include 'snippets/css.html' %}
 <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 <h1>Welcome to Building Manager</h1>
-<div>
-    <a href="{% url 'notification' %}">Notification</a>
-    <a href="{% url 'setup-graph' %}">Setup Test Graph</a>
-</div>
+{% include 'snippets/nav.html' %}
 {% block content %}{% endblock %}
 {% block footer %}
 <hr>
 <p>Thanks for visiting my site.</p>
 {% endblock %}
+{% include 'snippets/js.html' %}
 </body>
 </html>

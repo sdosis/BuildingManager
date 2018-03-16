@@ -2,4 +2,11 @@
 {% block title %}Persons{% endblock %}
 {% block content %}
 <p>This is the list of persons</p>
+<ul>
+{% for person in persons %}
+    <li>{{forloop.counter}}: {{person.name}} with phone {{person.mobile}}</li>
+{% empty %}
+    <p>There are no persons.</p>
+{% endfor %}
+</ul>
 {% endblock %}

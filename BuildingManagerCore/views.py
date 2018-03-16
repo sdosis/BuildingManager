@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,Http404,HttpResponseRedirect
+from django.views import View
+from django.views.generic import TemplateView
 from .forms import ContactForm,NotificationForm
 from .models import Person, Building,Apartment, DistrictNode, NeighborhoodNode, BuildingNode, ApartmentNode, PersonNode
 from neomodel import db
@@ -19,9 +21,29 @@ def get_person(request,person_id):
         raise Http404()
     return render(request, 'person.html', {"person_id":person_id})
 
+class PersonsView(View):
+    def get(self,request,*args,**kwargs):
+        persons = PersonNode.nodes.all()
+        context = {"persons":persons}
+        return render(request,'persons.html',context)
+
 def get_buildingsgraph(request):
     buildingnodes = BuildingNode.nodes.all()
     return render(request, 'buildingsgraph.html', {"buildingnodes":buildingnodes})
+
+class BuildingsView(TemplateView):
+    template_name = 'buildingsgraph.html'
+
+    def get_context_data(self,*args,**kwargs):
+        context = super(BuildingsView,self).get_context_data(*args, **kwargs)
+        buildingnodes = BuildingNode.nodes.all()
+        print(str(len(buildingnodes)))
+        context = {"buildingnodes":buildingnodes}
+        return context
+    #def get(self,request,*args,**kwargs):
+    #    buildingnodes = BuildingNode.nodes.all()
+    #    context = {"buildingnodes":buildingnodes}
+    #    return render(request,'buildingsgraph.html',context)
 
 def meta(request):
     return render(request, 'meta.html', {"meta":request.META})
